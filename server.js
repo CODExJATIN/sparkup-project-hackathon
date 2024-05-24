@@ -1,36 +1,73 @@
-
 const express = require('express');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
-const bodyparser = require("body-parser");
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 
-const connectDB = require('./server/database/connection');
-
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-dotenv.config( { path : 'config.env'} )
-const PORT = process.env.PORT || 8080
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// log requests
-app.use(morgan('tiny'));
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/registrationDB', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.log(err));
 
-// mongodb connection
-connectDB();
+// Multer setup for file uploads
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
 
-// parse request to body-parser
-app.use(bodyparser.urlencoded({ extended : true}))
+const upload = multer({ storage: storage });
 
-// set view engine
-app.set("view engine", "ejs")
-//app.set("views", path.resolve(__dirname, "views/ejs"))
+// Import User model
+const User = require('./models/User');
 
-// load assets
-app.use('/css', express.static(path.resolve(__dirname, "assets/css")))
-app.use('/img', express.static(path.resolve(__dirname, "assets/img")))
-app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
+// Routes
+app.post('/register', upload.single('picture'), async (req, res) => {
+    const { firstname, lastname, email, password, location, accounttype } = req.body;
+    const picture = req.file ? req.file.path : '';
 
-// load routers
-app.use('/', require('./server/routes/router'))
+    try {
+        // Check if user already exists
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ msg: 'User already exists' });
+        }
 
-app.listen(PORT, ()=> { console.log(`Server is running on http://localhost:${PORT}`)});
+        // Create new user
+        user = new User({
+            firstname,
+            lastname,
+            email,
+            password,
+            location,
+            accounttype,
+            picture
+        });
+
+        // Encrypt password
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+
+        await user.save();
+        res.status(201).json({ msg: 'User registered successfully' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
