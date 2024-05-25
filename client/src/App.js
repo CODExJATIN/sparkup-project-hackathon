@@ -9,12 +9,12 @@ import { useMemo } from 'react';
 import { CssBaseline,ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { themeSettings } from './theme';
+import ProfileSetup from './scenes/ProfileSetup/ProfileSetup';
 
 function App() {
   const mode = useSelector(state => state.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-
-
+  const accountType = useSelector(state=>state.accountType);
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
 
 
   return (
@@ -25,6 +25,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/:userId" element={<ProfilePage />} />
+          <Route path="/setup" element={<ProfileSetup />} />
         </Routes>
       </ThemeProvider>
       </BrowserRouter>

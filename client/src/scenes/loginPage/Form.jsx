@@ -19,7 +19,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../state"
+import { login } from "../../state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 
@@ -44,7 +44,7 @@ const initialValuesRegister = {
     email: "",
     password: "",
     location: "",
-    accountType: "",
+    accountType: "", 
     picture: " ",
 };
 

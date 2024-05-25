@@ -5,6 +5,7 @@ const initialState = {
     user: null,
     token: null,
     posts: [],
+    accountType:'startup'
 };
 
 export const authSlice = createSlice({
@@ -42,9 +43,12 @@ export const authSlice = createSlice({
            
 
         },
+        setAccountType: (state,action)=>{
+            state.accountType = action.payload.accountType;
+        }
     },
 });
 
-export const { login, logout, setMode, setPosts, setPost, setConnection } = authSlice.actions;
+export const { login, logout, setMode, setPosts, setPost, setConnection,setAccountType } = authSlice.actions;
 
 export default authSlice.reducer;

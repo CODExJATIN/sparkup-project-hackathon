@@ -1,12 +1,12 @@
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import React from 'react'
+import { Box, Typography, useTheme, useMediaQuery, } from "@mui/material";
 
 import EmojiObjectsTwoToneIcon from '@mui/icons-material/EmojiObjectsTwoTone';
+import StartupForm from './startupForm';
+import InvestorForm from './investorForm';
 
-import Form from "./Form";
 
-
-const LoginPage = () => {
-
+const ProfileSetup = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   return (
@@ -34,12 +34,16 @@ const LoginPage = () => {
       >
         <Typography className={theme.palette.mode==='dark'? 'dark-mode':'light-mode'} fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}
         >
-          Welcome to SparkUp, the platform to give a flight to your dream startup!
+          Let's Setup Your Profile before you start your journey!
         </Typography>
-        <Form />
+        {/*<StartupForm/>*/}
+        //HAVE TO HANDLE THIS ISSUE 
+        //WILL WORK ON IT LATER
+        
       </Box>
     </Box>
   );
-};
+}
 
-export default LoginPage;
+export default ProfileSetup
+
