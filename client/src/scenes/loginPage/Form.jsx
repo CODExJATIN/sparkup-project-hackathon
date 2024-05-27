@@ -103,7 +103,7 @@ const Form = () => {
                     token: loggedIn.token,
                 })
             );
-            navigate("/");
+            navigate("/home");
         }
     };
 

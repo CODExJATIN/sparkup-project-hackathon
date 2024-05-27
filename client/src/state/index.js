@@ -27,15 +27,15 @@ export const authSlice = createSlice({
             state.posts = action.payload.posts;
         },
         setPost: (state,action) => {
-            const updatedPost = state.posts.map((post)=>{
-                if(post._id === action.payload.post._id) return action.payload.post;
-
-                state.posts=updatedPost
-            })
+            const updatedPosts = state.posts.map((post) => {
+                if (post._id === action.payload.post._id) return action.payload.post;
+                return post;
+            });
+            state.posts = updatedPosts;
         },
         setConnection: (state, action) => {
           if(state.user){
-            state.user.connection = action.payload.connection;
+            state.user.connections = action.payload.connections;
           }
           else{
             console.error("User not found");

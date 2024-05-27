@@ -10,9 +10,9 @@ const router = express.Router();
 
 /* READ */
 router.get("/:id", verifyToken, getUser);
-router.get("/:id/friends", verifyToken, getUserConnection);
+router.get("/:id/connections", verifyToken, getUserConnection);
 
 /* UPDATE */
-router.patch("/:id/:friendId", verifyToken, addRemoveConnection);
+router.patch("/:id/:connectionId", verifyToken, addRemoveConnection);
 
 export default router;

@@ -23,12 +23,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  friends: {
+  connections: {
     type: Array,
     default: [],
   },
   location: String,
-  occupation: String,    
+  accountType: String,    
   viewedProfile: Number,
   impressions: Number,
   
