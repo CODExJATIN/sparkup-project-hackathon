@@ -5,7 +5,7 @@ const initialState = {
     user: null,
     token: null,
     posts: [],
-    accountType:'startup'
+    accountType:''
 };
 
 export const authSlice = createSlice({

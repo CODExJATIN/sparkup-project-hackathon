@@ -24,7 +24,7 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile/:userId" element={<ProfilePage />} />
+          {/*<Route path="/profile/:userId" element={<ProfilePage />} />*/}
           <Route path="/setup" element={<ProfileSetup />} />
         </Routes>
       </ThemeProvider>

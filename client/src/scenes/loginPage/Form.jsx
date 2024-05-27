@@ -19,7 +19,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../state";
+import { login as loginAction } from "../../state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 
@@ -45,7 +45,7 @@ const initialValuesRegister = {
     password: "",
     location: "",
     accountType: "", 
-    picture: " ",
+    picture: null,
 };
 
 const initialValuesLogin = {
@@ -69,13 +69,15 @@ const Form = () => {
         for (let value in values) {
             formData.append(value, values[value]);
         }
-        formData.append("picturePath", values.picture.name);
+        if (values.picture) {
+            formData.append("picturePath", values.picture.name);
+        }
 
         const savedUserResponse = await fetch(
             "http://localhost:5000/auth/register",
             {
-                method: "POST",
-                body: formData,
+                method: "POST", 
+                body: formData, 
             }
         );
         const savedUser = await savedUserResponse.json();
@@ -96,7 +98,7 @@ const Form = () => {
         onSubmitProps.resetForm();
         if (loggedIn) {
             dispatch(
-                login({
+                loginAction({
                     user: loggedIn.user,
                     token: loggedIn.token,
                 })
@@ -141,7 +143,7 @@ const Form = () => {
                                     label="First Name"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value={values.firstName}
+                                    value={values.firstName || ""}
                                     name="firstName"
                                     error={
                                         Boolean(touched.firstName) && Boolean(errors.firstName)
@@ -153,7 +155,7 @@ const Form = () => {
                                     label="Last Name"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value={values.lastName}
+                                    value={values.lastName || ""}
                                     name="lastName"
                                     error={Boolean(touched.lastName) && Boolean(errors.lastName)}
                                     helperText={touched.lastName && errors.lastName}
@@ -163,7 +165,7 @@ const Form = () => {
                                     label="Location"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value={values.location}
+                                    value={values.location || ""}
                                     name="location"
                                     error={Boolean(touched.location) && Boolean(errors.location)}
                                     helperText={touched.location && errors.location}
@@ -179,12 +181,13 @@ const Form = () => {
                                         label="Account Type"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        value={values.accountType}
+                                        value={values.accountType || ""}
                                         name="accountType"
                                     >
-                                        <MenuItem value="startup">StartUp</MenuItem>
-                                        <MenuItem value="investor">Investor</MenuItem>
-                                        <MenuItem value="funder">Funder</MenuItem>
+                                        <MenuItem value="">Select Account Type</MenuItem>
+                                        <MenuItem value="Startup">StartUp</MenuItem>
+                                        <MenuItem value="Investor">Investor</MenuItem>
+                                        <MenuItem value="Funder">Funder</MenuItem>
                                     </Select>
                                     {touched.accountType && errors.accountType && (
                                         <p style={{ color: "red", fontSize: "0.75rem", marginTop: "4px" }}>
@@ -199,32 +202,32 @@ const Form = () => {
                                     borderRadius="5px"
                                     p="1rem"
                                 >
-                                    <Dropzone
-                                        acceptedFiles=".jpg,.jpeg,.png"
-                                        multiple={false}
-                                        onDrop={(acceptedFiles) =>
-                                            setFieldValue("picture", acceptedFiles[0])
-                                        }
+                                  <Dropzone
+                                    acceptedFiles=".jpg,.jpeg,.png"
+                                    multiple={false}
+                                    onDrop={(acceptedFiles) =>
+                                    setFieldValue("picture", acceptedFiles[0] || null)
+                                    }
+                                >
+                                    {({ getRootProps, getInputProps }) => (
+                                    <Box
+                                        {...getRootProps()}
+                                        border={`2px dashed ${palette.primary.main}`}
+                                        p="1rem"
+                                        sx={{ "&:hover": { cursor: "pointer" } }}
                                     >
-                                        {({ getRootProps, getInputProps }) => (
-                                            <Box
-                                                {...getRootProps()}
-                                                border={`2px dashed ${palette.primary.main}`}
-                                                p="1rem"
-                                                sx={{ "&:hover": { cursor: "pointer" } }}
-                                            >
-                                                <input {...getInputProps()} />
-                                                {!values.picture ? (
-                                                    <p className={theme.palette.mode==='dark'? 'dark-mode':'light-mode'}>Add Picture Here</p>
-                                                ) : (
-                                                    <FlexBetween>
-                                                        <Typography>{values.picture.name}</Typography>
-                                                        <EditOutlinedIcon />
-                                                    </FlexBetween>
-                                                )}
-                                            </Box>
+                                        <input {...getInputProps()} />
+                                        {!values.picture ? (
+                                        <p>Add Picture Here</p>
+                                        ) : (
+                                        <FlexBetween>
+                                            <Typography>{values.picture.name}</Typography>
+                                            <EditOutlinedIcon />
+                                        </FlexBetween>
                                         )}
-                                    </Dropzone>
+                                    </Box>
+                                    )}
+                                </Dropzone>
                                 </Box>
                             </>
                         )}
@@ -233,7 +236,7 @@ const Form = () => {
                             label="Email"
                             onBlur={handleBlur}
                             onChange={handleChange}
-                            value={values.email}
+                            value={values.email || ""}
                             name="email"
                             error={Boolean(touched.email) && Boolean(errors.email)}
                             helperText={touched.email && errors.email}
@@ -244,7 +247,7 @@ const Form = () => {
                             type="password"
                             onBlur={handleBlur}
                             onChange={handleChange}
-                            value={values.password}
+                            value={values.password || ""}
                             name="password"
                             error={Boolean(touched.password) && Boolean(errors.password)}
                             helperText={touched.password && errors.password}
