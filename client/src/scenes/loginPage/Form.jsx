@@ -30,7 +30,7 @@ const registerSchema = yup.object().shape({
     password: yup.string().required("required"),
     location: yup.string().required("required"),
     accountType: yup.string().required("required"),
-    picture: yup.string()
+    picture: yup.string().required("required")
 });
 
 const loginSchema = yup.object().shape({

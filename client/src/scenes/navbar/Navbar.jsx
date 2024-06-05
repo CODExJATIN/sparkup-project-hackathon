@@ -9,6 +9,7 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
+  Icon,
 } from "@mui/material";
 import {
   Search,
@@ -25,7 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, logout } from "../../state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "../../components/FlexBetween";
-
+import MovieIcon from '@mui/icons-material/Movie';
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -92,14 +93,30 @@ const Navbar = () => {
 
 
           {theme.palette.mode === "dark" ? (<>
-            <Message sx={{ fontSize: "25px", color: "white" }} />
-            <Notifications sx={{ fontSize: "25px", color: "white" }} />
-            <Help sx={{ fontSize: "25px", color: "white" }} />
+          <IconButton onClick={() => navigate('/reels')}>
+             <MovieIcon sx={{fontSize:"25px", color:"white"}}/>
+          </IconButton>
+
+          <IconButton onClick={() => navigate('/home')}>
+          <Message sx={{ fontSize: "25px", color: "white" }} />
+          </IconButton>
+
+          <IconButton onClick={() => navigate('/home')}>
+          <Notifications sx={{ fontSize: "25px", color: "white" }} />
+          </IconButton>
+            
           </>) :
             (<>
-              <Message sx={{ fontSize: "25px" }} />
-              <Notifications sx={{ fontSize: "25px" }} />
-              <Help sx={{ fontSize: "25px" }} />
+            <IconButton onClick={() => navigate('/reels')}>
+            <MovieIcon sx={{fontSize:"25px"}} />
+            </IconButton>
+            <IconButton onClick={() => navigate('/home')}>
+            <Message sx={{ fontSize: "25px" }} />
+            </IconButton>
+            <IconButton onClick={() => navigate('/home')}>
+            <Notifications sx={{ fontSize: "25px" }} />
+            </IconButton>
+              
             </>)}
 
 
@@ -177,14 +194,29 @@ const Navbar = () => {
               )}
             </IconButton>
             {theme.palette.mode === "dark" ? (<>
-              <Message sx={{ fontSize: "25px", color: "white" }} />
-              <Notifications sx={{ fontSize: "25px", color: "white" }} />
-              <Help sx={{ fontSize: "25px", color: "white" }} />
+              <IconButton onClick={() => navigate('/reels')}>
+             <MovieIcon sx={{fontSize:"25px", color:"white"}}/>
+          </IconButton>
+
+          <IconButton onClick={() => navigate('/home')}>
+          <Message sx={{ fontSize: "25px", color: "white" }} />
+          </IconButton>
+
+          <IconButton onClick={() => navigate('/home')}>
+          <Notifications sx={{ fontSize: "25px", color: "white" }} />
+          </IconButton>
             </>) :
               (<>
-                <Message sx={{ fontSize: "25px" }} />
-                <Notifications sx={{ fontSize: "25px" }} />
-                <Help sx={{ fontSize: "25px" }} />
+                 
+            <IconButton onClick={() => navigate('/reels')}>
+            <MovieIcon sx={{fontSize:"25px"}} />
+            </IconButton>
+            <IconButton onClick={() => navigate('/home')}>
+            <Message sx={{ fontSize: "25px" }} />
+            </IconButton>
+            <IconButton onClick={() => navigate('/home')}>
+            <Notifications sx={{ fontSize: "25px" }} />
+            </IconButton>
               </>)}
             <FormControl variant="standard" value={fullName}>
               <Select

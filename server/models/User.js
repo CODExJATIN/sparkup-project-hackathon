@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
   },
   picturePath: {
     type: String,
-    default: "",
+    default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
   },
   connections: {
     type: Array,
@@ -36,6 +36,11 @@ const UserSchema = new mongoose.Schema({
     type: String, 
     required: true,
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 },
 
 {

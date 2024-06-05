@@ -38,7 +38,7 @@ const ProfileSetup = () => {
         </Typography>
         {/*<StartupForm/>*/}
         //HAVE TO HANDLE THIS ISSUE 
-        //WILL WORK ON IT LATER
+        //WILL WORK ON IT LATER 
         
       </Box>
     </Box>
