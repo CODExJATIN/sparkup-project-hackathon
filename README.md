@@ -69,8 +69,16 @@ SparkUp is a comprehensive platform designed to bridge the gap between startups 
 5. **Access the application**:
     Open your browser and go to `http://localhost:3000`
 
-## Screenshots
+## Screenshots & Videos
 
+### Video Demonstartions
+
+#### Login
+<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExanlzdTA5d2cyN2Z3eDJnbXRlZnQwdmNhaDRqcnJ2cWFyNTJnMTRqdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8EUprheyLn9wBq8CmN/giphy.gif"/>
+#### HomePage and Profile Page
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHVxYm4zZ3hxaWI5anV1cXIyMnV5Y2cxM2lmZHRjMGl0Ymh2dnB1YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rwJK29UDWbWIAUD2MR/giphy.gif"/>
+
+### Screenshots
 #### Login Page
 <img src="https://i.ibb.co/z8ydDdr/Screenshot-1426.png" alt="Screenshot-1426" border="0">
 
