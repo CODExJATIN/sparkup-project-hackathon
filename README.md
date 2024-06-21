@@ -2,6 +2,11 @@
 
 ## SparkUp: Connect, Innovate, Accelerate
 
+<div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #f9f9f9;">
+  <h2>🚀 New Development</h2>
+  <p>We have developed <strong>SparkUp</strong> as a React-Firebase app too. It's hosted live too. <a href="https://github.com/CODExJATIN/sparkup-react-firebase" style="text-decoration: none; color: #fff; background-color: #007bff; padding: 10px 15px; border-radius: 5px;">Check it out here</a></p>
+</div>
+
 SparkUp is a comprehensive platform designed to bridge the gap between startups and investors, fostering meaningful connections and facilitating seamless fundraising processes. Our platform offers innovative features like intro video reels, integrated meeting systems, and direct business proposals, all aimed at revolutionizing the startup funding ecosystem.
 
 ## Tech Stack
